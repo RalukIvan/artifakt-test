@@ -1,4 +1,4 @@
-# vuejs-starter-project
+# Employee management application
 
 ## Project setup
 ```

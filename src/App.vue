@@ -1,26 +1,36 @@
 <template lang="pug">
  #app
-    Home(msg="Welcome to my vuejs-starter-project")
+    router-view
 </template>
 
 <script>
-import Home from '@/views/Home.vue'
 
 export default {
     name: 'App',
-    components: {
-        Home,
-    },
 }
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,400&display=swap');
+body {
+    background-color: #E5E5E5;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-color: #E5E5E5;
+}
+:focus {
+    outline: none;
+}
+input {
+    border: none;
+}
+
+button {
+    border: none;
 }
 </style>

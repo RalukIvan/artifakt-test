@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '@/views/Home.vue'
+import EmployeeList from '@/views/EmployeeList.vue'
 
 Vue.use(Router)
 
@@ -11,7 +11,12 @@ export default new Router({
             // default route
             path: '/',
             name: 'home',
-            component: Home,
+            component: EmployeeList,
+        },
+        {
+            path: '/employee/:employeeId',
+            name: 'employee-profile',
+            // component: EmployeeProfile,
         },
     ],
 })
