@@ -19,6 +19,13 @@ export const mutations = {
     saveCommits: (state, commits) => {
         state.commits = JSON.parse(JSON.stringify(commits))
     },
+    addEmployeeToList: (state, employee) => {
+        if (state.employees) {
+            state.employees.push(employee)
+        } else {
+            state.employees = [employee]
+        }
+    },
 }
 
 export const getters = {
@@ -28,7 +35,9 @@ export const getters = {
     },
     // employees state
     employees: (state) => {
-        return state.employees
+        return state.employees ? state.employees.sort((a, b) => {
+            return new Date(a.created_at) - new Date(b.created_at)
+        }) : null
     },
     selectedEmployee: (state) => {
         return state.selectedEmployee
@@ -41,14 +50,11 @@ export const getters = {
 }
 
 export const actions = {
-    getEmployees: ({ commit }) => {
+    getEmployees: ({ commit, state }) => {
         commit('setLoading', true)
         return resources.getEmployees()
         .then((employees) => {
-            const orderedEmployees = employees.sort((a, b) => {
-                return new Date(a.created_at) - new Date(b.created_at)
-            })
-            commit('saveEmployees', orderedEmployees)
+            commit('saveEmployees', employees)
         })
         .finally(() => {
             commit('setLoading', false)
@@ -73,6 +79,9 @@ export const actions = {
         .finally(() => {
             commit('setLoading', false)
         })
+    },
+    addEmployeeToList: ({ commit }, employee) => {
+        commit('addEmployeeToList', employee)
     },
 }
 

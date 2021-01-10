@@ -4,11 +4,11 @@
     .employees
         Loader(v-if="loading")
         .employees-actions
-            button.employees-actions-add(@click="addEmployee")
+            button.employees-actions-add(@click="addEmployee", title="Add a new employee")
                 i.fa.fa-plus
             form.search-form(name="searchForm", @submit="searchEmployees")
                 input.employees-actions-input-search#searchEmployees(type="search", name=s, placeholder="String to search...", results="0", aria-label="Search", v-model="searchString")
-                button.employees-actions-search(type="submit")
+                button.employees-actions-search(type="submit", title="Search")
                   i.fa.fa-search
         div(v-if="displayedEmployees && displayedEmployees.length === 0 && !loading")
             span There are no results matching your search
@@ -48,14 +48,19 @@ export default {
         }
     },
     computed: mapGetters(['employees', 'loading']),
-    created() {
-        this.getEmployees()
-        .then(() => {
+    mounted() {
+        if (!this.employees) {
+            this.getEmployees()
+            .then(() => {
+                this.displayedEmployees = this.employees
+            })
+            .catch((err) => {
+                this.errorMessage = err
+            })
+        } else {
             this.displayedEmployees = this.employees
-        })
-        .catch((err) => {
-            this.errorMessage = err
-        })
+        }
+        
     },
     methods: {
         ...mapActions(['getEmployees']),
