@@ -4,7 +4,7 @@ Interface that allows a user to visualise a list of employees, see the commits f
 
 ## Prerequisites
 
-The project was built on node 12, built over a void template (personal project template with lint, project structure and others things set by default)
+The project uses node 12, and was built over a void vuejs template (personal project template with lint, project structure and modules added by default)
 ## Project setup
 ```
 npm install
@@ -30,9 +30,8 @@ npm run lint
 npm run test
 ```
 
-
-
 ### Application structure
+* `__tests__` - components tests
 * `components` - application components
 * `store` - application state management files
 * `views` - application pages
