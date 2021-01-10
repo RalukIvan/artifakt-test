@@ -50,8 +50,8 @@ export default {
     computed: mapGetters(['employees', 'loading']),
     created() {
         this.getEmployees()
-        .then((employees) => {
-          this.displayedEmployees = this.employees
+        .then(() => {
+            this.displayedEmployees = this.employees
         })
         .catch((err) => {
             this.errorMessage = err

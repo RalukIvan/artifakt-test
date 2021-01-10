@@ -1,12 +1,11 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import { expect } from 'chai'
-import EmployeeList from './EmployeeList.vue'
+import EmployeeList from '../views/EmployeeList.vue'
 import EmployeeCard from '../components/employee/EmployeeCard.vue'
 import ErrorMessage from '../components/common/ErrorMessage.vue'
 
 import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
 
 //create mock store for component
 const localVue = createLocalVue()
