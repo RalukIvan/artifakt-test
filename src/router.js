@@ -14,16 +14,25 @@ export default new Router({
             path: '/',
             name: 'home',
             component: EmployeeList,
+            meta: {
+                title: 'Employee List',
+            },
         },
         {
             path: '/employee/:employeeId',
             name: 'employee-profile',
             component: EmployeeProfile,
+            meta: {
+                title: 'Employee Profile',
+            },
         },
         {
             path: '/new-employee',
             name: 'add-employees',
             component: NewEmployeeForm,
+            meta: {
+                title: 'New Employee Form',
+            },
         },
     ],
 })
