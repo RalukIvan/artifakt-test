@@ -12,11 +12,11 @@
                   i.fa.fa-search
         div(v-if="displayedEmployees && displayedEmployees.length === 0 && !loading")
             span There are no results matching your search
-        div(v-if="!displayedEmployees && !loading")
+        div(v-else-if="!displayedEmployees && !loading")
             span There are no employees in the list!
         
-        div.employees-list(v-if="displayedEmployees && !loading")
-            EmployeeCard(v-for="(employee, index) in displayedEmployees", :key="`employee${index}`", :employeeData="employee")
+        div.employees-list(v-else-if="displayedEmployees && !loading")
+            EmployeeCard(v-for="(employee, index) in displayedEmployees", :key="employee.id", :employeeData="employee")
         ErrorMessage(v-if="errorMessage && !loading")
             p An error occured when we tried to load the employees. We are sorry for the incovenience! {{errorMessage}}
   

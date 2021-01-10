@@ -11,10 +11,13 @@ export const mutations = {
         state.loading = loading
     },
     saveSelectedEmployee: (state, employee) => {
-        state.selectedemployee = JSON.parse(JSON.stringify(employee))
+        state.selectedEmployee = JSON.parse(JSON.stringify(employee))
     },
     saveEmployees: (state, employees) => {
         state.employees = JSON.parse(JSON.stringify(employees))
+    },
+    saveCommits: (state, commits) => {
+        state.commits = JSON.parse(JSON.stringify(commits))
     },
 }
 
@@ -26,6 +29,14 @@ export const getters = {
     // employees state
     employees: (state) => {
         return state.employees
+    },
+    selectedEmployee: (state) => {
+        return state.selectedEmployee
+    },
+    commitsByEmployeeId: (state) => {
+        return state.commits && state.selectedEmployee && state.commits.filter((item) => {
+            return item.owner_id === state.selectedEmployee.id
+        })
     },
 }
 
@@ -43,9 +54,30 @@ export const actions = {
             commit('setLoading', false)
         })
     },
+    getEmployeeInfo: ({commit}, id) => {
+        commit('setLoading', true)
+        return resources.getEmployeeInfo(id)
+        .then((employeeInfo) => {
+            commit('saveSelectedEmployee', employeeInfo)
+        })
+        .finally(() => {
+            commit('setLoading', false)
+        })
+    },
+    getCommits: ({commit}) => {
+        commit('setLoading', true)
+        return resources.getCommits()
+        .then((commits) => {
+            commit('saveCommits', commits)
+        })
+        .finally(() => {
+            commit('setLoading', false)
+        })
+    },
 }
 
 export const state = {
+    commits: undefined,
     employees: undefined,
     selectedEmployee: undefined,
     loading: false,
